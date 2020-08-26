@@ -1,37 +1,10 @@
 #define PY_SSIZE_T_CLEAN
 #include <Python.h>
 
-inline PyObject *PYC_Add(PyObject *l, PyObject *r) {
-  // allow __add__ override
-
-  // Include ints and bools
-  if (PyLong_Check(l) && PyLong_Check(r)) {
-    return PyNumber_Add(l, r);
-  }
-
-  // handle str, etc.
-
-  // throw exception
-  return NULL;
-}
-
-inline PyObject *PYC_Sub(PyObject *l, PyObject *r) {
-  // allow __add__ override
-
-  // Include ints and bools
-  if (PyLong_Check(l) && PyLong_Check(r)) {
-    return PyNumber_Subtract(l, r);
-  }
-
-  // handle str, etc
-
-  // throw exception
-  return NULL;
-}
-
 inline PyObject *PYC_Print(PyObject *o) {
   PyObject_Print(o, stdout, Py_PRINT_RAW);
   printf("\n");
+  Py_INCREF(Py_None);
   return Py_None;
 }
 
@@ -58,13 +31,16 @@ done_or_3:
     return n_1;
   }
 
+  PyObject *binop_8;
+  PyObject *binop_9;
   PyObject *num_10 = PyLong_FromLong(1);
-  PyObject *binop_9 = PYC_Sub(n_1, num_10);
+  binop_9 = PyNumber_Subtract(n_1, num_10);
   PyObject *call_result_11 = fib_0(binop_9);
+  PyObject *binop_12;
   PyObject *num_13 = PyLong_FromLong(2);
-  PyObject *binop_12 = PYC_Sub(n_1, num_13);
+  binop_12 = PyNumber_Subtract(n_1, num_13);
   PyObject *call_result_14 = fib_0(binop_12);
-  PyObject *binop_8 = PYC_Add(call_result_11, call_result_14);
+  binop_8 = PyNumber_Add(call_result_11, call_result_14);
 
   return binop_8;
 }

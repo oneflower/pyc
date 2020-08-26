@@ -24,7 +24,7 @@ def main():
 
     for builtin, fn in BUILTINS.items():
         ctx.register_global(builtin, fn)
-    
+
     generate(ctx, tree)
 
     # Create and move to working directory
