@@ -55,7 +55,7 @@ def main():
 
     ldflags_raw = subprocess.check_output(["python3-config", "--ldflags"])
     ldflags = [f.strip() for f in ldflags_raw.decode().split(" ") if f.strip()]
-    cmd = ["gcc"] + ldflags + ["main.o"]
+    cmd = ["gcc"] + ldflags + ["main.o"] + ["-lpython3.8"]
     subprocess.run(cmd)
 
 
